@@ -1,21 +1,12 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
-using System.Text;
-using WebApi.ApplicationConstants;
-using WebApi.Repositories;
-using WebApi.Repositories.Interfaces;
-using WebApi.Services;
 using WebApi.Services.DependencyInjection;
-using WebApi.Services.Interfaces;
-using static Dapper.SqlMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .Configuration
-    .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+//builder
+//    .Configuration
+//    .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 
 // Add services to the container.
 builder.Services.AddDatabaseService(builder.Configuration);
@@ -40,12 +31,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(options => {
+app.UseCors(options =>
+{
     options
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader();
-}) ;
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
