@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
+using WebApi.Models.Request;
 using WebApi.Repositories.Interfaces;
 using WebApi.Services.Interfaces;
 
@@ -23,20 +24,19 @@ namespace WebApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(User user)
+        public async Task<ActionResult<AccessToken>> Login(UserRequest userRequest)
         {
-            var thisUser = await _userRepository.GetByUsernameAsync(user.Username);
-            if (thisUser is null || thisUser?.PasswordHash != user.PasswordHash)
+            var user = await _userRepository.GetByUsernameAsync(userRequest.Username);
+            if (user is null 
+                || !Models.User.IsCorrectPassoword(user.PasswordHash, userRequest.Password))
             {
-                var message = "Inavalid user or password";
+                var message = "Inavalid userRequest or password";
                 return Unauthorized(message);
             }
             
-            var token = _tokenService.GenerateToken(thisUser);
+            var token = _tokenService.GenerateToken(user);
             
-            return Ok(new { 
-                accessToken = token
-            });
+            return Ok(token);
         }
     }
 }

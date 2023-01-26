@@ -15,9 +15,10 @@ namespace WebApi.Models
 
         public override bool Equals(object? obj)
         {
-            if(obj?.GetType() == GetType())
+            if(obj?.GetType() == typeof(Image))
             {
-                return Equals(obj);
+                var _ = (Image)obj;
+                return _.Id == Id;
             }
             return false;
         }
