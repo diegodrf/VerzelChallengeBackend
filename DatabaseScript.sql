@@ -195,10 +195,10 @@ insert into Brands values ('MCLAREN');
 insert into Brands values ('GEELY');
 
 -- Populate Vehicles
-insert into Vehicles values ('Tracker', 'SUV', 8000000, 1);
-insert into Vehicles values ('Gol', 'Hatch', 4000000, 2);
-insert into Vehicles values ('Palio', 'Fiat', 2850000, 3);
-insert into Vehicles values ('Civic', 'Sedan', 9735295, 7);
+insert into Vehicles values ('Tracker', 'SUV', 80000, 1);
+insert into Vehicles values ('Gol', 'Hatch', 40000, 2);
+insert into Vehicles values ('Palio', 'Fiat', 28500, 3);
+insert into Vehicles values ('Civic', 'Sedan', 97352, 7);
 
 -- Populate Images
 insert into Images values ('163d96556e34464ea61b9cd9b66db044.jfif', 1);
